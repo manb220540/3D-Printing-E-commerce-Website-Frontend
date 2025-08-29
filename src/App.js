@@ -8,7 +8,7 @@ import HeroSection from './components/HeroSection';
 import FeatureSection from './components/FeatureSection';
 import ProductGrid from './components/ProductGrid'; // Sẽ dùng cho trang chủ
 import { Container } from 'react-bootstrap';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext'; // Import AuthProvider
 import { CartProvider } from './context/CartContext'; // Import CartProvider
 import { SearchProvider } from './context/SearchContext';
@@ -20,6 +20,7 @@ import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
 import ForgotPassword from './components/ForgotPassword';
 import VerifyOTP from './components/VerifyOTP';
+import OrderFlowRoute from './components/OrderFlowRoute';
 
 // Import Toast notifications
 import { ToastContainer } from 'react-toastify';
@@ -37,6 +38,9 @@ import OrderTracking from './pages/OrderTracking'; // Trang theo dõi đơn hàn
 import CheckoutPage from './pages/CheckoutPage';
 import NotificationsPage from './pages/NotificationsPage';
 import ConfirmationPage from './pages/ConfirmationPage'; // New confirmation page
+import CustomOrderPage from './pages/CustomOrderPage'; // Trang đặt hàng in 3D tùy chỉnh
+import CustomCheckoutPage from './pages/CustomCheckoutPage';
+import CustomConfirmPage from './pages/CustomConfirmationPage';
 
 // Trang chi tiết blog 
 import BlogDetailPage from './pages/BlogDetailPage';
@@ -60,7 +64,7 @@ function App() {
               <div className="App">
                 {/* Conditional Header based on admin role and route */}
                 <HeaderSwitcher />
-                <ToastContainer /> {/* Hiển thị Toast notifications */}
+                <ToastContainer/> {/* Hiển thị Toast notifications */}
 
                 <main> {/* Sử dụng thẻ main để bọc nội dung chính */}
                   <Routes> {/* Định nghĩa các Route */}
@@ -83,12 +87,16 @@ function App() {
                     <Route path="/lien-he" element={<ContactPage />} />
                     <Route path="/chinh-sach" element={<PolicyPage />} />
                     <Route path="/gio-hang" element={<CartPage />} />
-                    <Route path="/checkout" element={<CheckoutPage />} />
-                    <Route path="/confirmation" element={<ConfirmationPage />} />
+                    <Route path="/checkout" element={<OrderFlowRoute><CheckoutPage /></OrderFlowRoute>} />
+                    <Route path="/confirmation" element={<OrderFlowRoute requireState><ConfirmationPage /></OrderFlowRoute>} />
                     <Route path="/thong-bao" element={<NotificationsPage />} />
                     <Route path="/orders" element={<OrderTracking />} />
+                    <Route path="/custom-order" element={<CustomOrderPage />} />
                     <Route path="/forgot-password" element={<ForgotPassword />} />
                     <Route path="/verify-otp" element={<VerifyOTP />} />
+                    <Route path="/custom-checkout" element={<OrderFlowRoute requireState><CustomCheckoutPage /></OrderFlowRoute>} />
+                    <Route path="/custom-confirm" element={<OrderFlowRoute requireState><CustomConfirmPage /></OrderFlowRoute>} />
+
 
                     <Route path="*" element={<NotFoundPage />} /> {/* Catch-all route for 404 */}
                     {/* User Profile Route - Yêu cầu xác thực */}

@@ -1,15 +1,16 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Container, Row, Col, Card, Button, Spinner, Alert } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, Alert } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { CartContext } from '../context/CartContext';
-import AuthContext from '../context/AuthContext';
+
 
 function ConfirmationPage() {
   const { state } = useLocation();
   const navigate = useNavigate();
-  const { checkout, isLoading } = useContext(CartContext);
-  const authCtx = useContext(AuthContext);
+  const { isLoading } = useContext(CartContext);
+  const { checkout } = useContext(CartContext);
+  
 
   const { shippingAddress, phoneNumber, paymentMethod, cartItems } = state || {};
   const [isConfirming, setIsConfirming] = useState(false);
@@ -25,7 +26,7 @@ function ConfirmationPage() {
   const handleConfirmOrder = async () => {
     setIsConfirming(true);
     try {
-      const orderId = await checkout(shippingAddress, phoneNumber, paymentMethod);
+      const orderId = await checkout(shippingAddress, phoneNumber, paymentMethod); // quan trọng khoong xoa
       toast.success('Đơn hàng đã được xác nhận thành công!');
       navigate('/gio-hang');
     } catch (err) {
@@ -48,7 +49,9 @@ function ConfirmationPage() {
             <Card.Body>
               <Card.Title>Thông tin Người dùng</Card.Title>
               <Card.Text>
-                Tên: {authCtx.user?.username || 'Không xác định'}
+                {/* Tên: {authCtx.user?.username || 'Không xác định'}
+                <br /> */}
+                Họ và tên: {state.fullName || 'Không xác định'}  
                 <br />
                 Địa chỉ giao hàng: {shippingAddress}
                 <br />

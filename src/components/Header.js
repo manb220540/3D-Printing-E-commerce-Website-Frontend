@@ -48,9 +48,11 @@ function Header() {
           <Nav className="mx-auto">
             <Nav.Link as={Link} to="/" className="fw-bold mx-2">Trang chủ</Nav.Link>
             <Nav.Link as={Link} to="/san-pham" className="fw-bold mx-2">Sản phẩm</Nav.Link>
+            <Nav.Link as={Link} to="/custom-order" className="fw-bold mx-2">In 3D theo yêu cầu</Nav.Link>
             <Nav.Link as={Link} to="/dich-vu" className="fw-bold mx-2">Dịch vụ</Nav.Link>
             <Nav.Link as={Link} to="/blog" className="fw-bold mx-2">Blog</Nav.Link>
             <Nav.Link as={Link} to="/lien-he" className="fw-bold mx-2">Liên hệ</Nav.Link>
+            
           </Nav>
 
           <Nav className="ms-auto align-items-center">

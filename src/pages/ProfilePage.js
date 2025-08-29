@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Container, Row, Col, Card, Spinner, Form, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import AuthContext from '../context/AuthContext';
 import useFetch from '../hooks/useFetch';
@@ -7,6 +8,7 @@ import useFetch from '../hooks/useFetch';
 function ProfilePage() {
   const authCtx = useContext(AuthContext);
   const { data: profileData, isLoading, error, sendRequest } = useFetch();
+  const navigate = useNavigate(); 
   console.log('useFetch returned:', { data: profileData, isLoading, error, sendRequest });
 
   const [profile, setProfile] = useState(null);
@@ -105,7 +107,7 @@ function ProfilePage() {
 
     // Validate all fields before submission
     const allFields = ['full_name', 'email', 'phone_number'];
-    let hasErrors = false;
+    // let hasErrors = false;
     allFields.forEach(field => validateField(field, formData[field]));
     if (Object.keys(validationErrors).length > 0) {
       toast.error('Vui lòng sửa các lỗi trước khi lưu.', {
@@ -180,6 +182,14 @@ function ProfilePage() {
                   {/* <p><strong>Vai trò:</strong> {profile.role || 'user'}</p> */}
                   <Button variant="primary" onClick={() => setIsEditing(true)} className="w-100 mt-3">
                     Chỉnh sửa thông tin
+                  </Button>
+                  {/*Nút quên mật khẩu */}
+                  <Button 
+                    variant="warning" 
+                    onClick={() => navigate('/forgot-password')} 
+                    className="w-100 mt-3"
+                  >
+                    Quên mật khẩu
                   </Button>
                 </>
               ) : (

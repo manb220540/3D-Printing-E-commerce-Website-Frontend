@@ -38,6 +38,7 @@ function Footer() {
             <ul className="list-unstyled">
               {/* Sử dụng <Link to="..."> thay vì <a href="#..."> */}
               <li className="mb-2"><Link to="/san-pham" className="text-white text-decoration-none">Sản phẩm</Link></li>
+              <li className="mb-2"><Link to="/custom-order" className="text-white text-decoration-none">In 3D theo yêu cầu</Link></li>
               <li className="mb-2"><Link to="/dich-vu" className="text-white text-decoration-none">Dịch vụ</Link></li>
               <li className="mb-2"><Link to="/blog" className="text-white text-decoration-none">Blog</Link></li>
               <li className="mb-2"><Link to="/lien-he" className="text-white text-decoration-none">Liên hệ</Link></li>
