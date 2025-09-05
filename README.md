@@ -1,70 +1,123 @@
-# Getting Started with Create React App
+# 3D Printing E-commerce Website Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the **frontend repository** for the 3D Printing E-commerce Website, a full-stack application that allows users to browse and purchase 3D printing products, place custom print orders, and manage their accounts.  
+The frontend is built with **React**, styled with **Bootstrap**, and integrates with the backend APIs to provide real-time features such as authentication, order tracking, and an AI-powered chatbot.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- User authentication and session handling (login, register, logout).
+- Product browsing with search and filter options.
+- Shopping cart management and checkout process.
+- Order management with real-time status updates and cancellation options.
+- Custom 3D printing order form with file upload support.
+- AI-powered chatbot integration via Gemini API for customer support.
+- Responsive UI built with React and Bootstrap.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Prerequisites
 
-### `npm test`
+- Node.js (v16.x or higher recommended)
+- Git
+- Backend server running (see [Backend Repository](../print3d-backend))
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 1. Clone the Repository
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+git clone https://github.com/manb220540/3D-Printing-E-commerce-Website-Frontend.git
+cd 3D-Printing-E-commerce-Website-Frontend
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 2. Install Dependencies
 
-### `npm run eject`
+```bash
+npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 3. Configure Environment Variables
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Create a `.env` file in the root of the project with the following variables:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+REACT_APP_BACKEND_API= your_api_backend
+REACT_APP_CHATBOT_API=your_api_backend/chatbot
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```
 
-## Learn More
+- **REACT_APP_BACKEND_API:** The base URL of the backend API (used for authentication, products, orders, etc.).
+- **REACT_APP_CHATBOT_API:** The endpoint for the AI chatbot integration.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 4. Run the Application
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Development mode:
 
-### Code Splitting
+```bash
+npm run start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Build for production:
 
-### Analyzing the Bundle Size
+```bash
+npm run build
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+## Project Structure
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+frontend/
+├── public/             # Static assets
+├── src/                # Source code
+│   ├── components/     # Reusable React components
+│   ├── pages/          # Application pages (Home, Products, Cart, Orders, Admin, etc.)
+│   ├── services/       # API service calls using axios
+│   ├── App.js          # Main React app
+│   ├── index.js        # Entry point
+├── .env                # Environment variables
+├── package.json        # Project metadata and dependencies
+```
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Dependencies
 
-### Deployment
+- **React** – Core UI framework
+- **React Router DOM** – Client-side routing
+- **Axios** – HTTP requests
+- **Bootstrap & React-Bootstrap** – Styling and UI components
+- **React Toastify** – Toast notifications
+- **SweetAlert2** – Alert dialogs
+- **js-cookie** – Manage cookies
+- **jwt-decode** – Decode JWT tokens
+- **xlsx, jspdf, jspdf-autotable** – Export reports
+- **Three.js + @react-three/fiber + drei** – 3D rendering and model viewer
+- **React Icons** – Icon library
+  Dev utilities:
+- **react-scripts** – Development/build scripts
+- **testing-library** – React testing utilities
+- **web-vitals** – Performance measurement
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+### Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Feel free to fork this repository, submit issues, or create pull requests. Please follow the existing code style and update `.gitignore` if necessary.
+
+---
+
+### License
+
+This project is licensed under the ISC License.
+
+---
+
+### Contact
+
+For questions or support, please open an issue or contact the maintainer.
