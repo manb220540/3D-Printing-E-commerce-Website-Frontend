@@ -14,6 +14,7 @@ import { CartProvider } from './context/CartContext'; // Import CartProvider
 import { SearchProvider } from './context/SearchContext';
 import { NotificationProvider } from './context/NotificationContext';
 import AuthContext from './context/AuthContext'; // Import AuthContext for HeaderSwitcher
+import { OrderProvider } from './context/OrderContext';
 
 // Import các component
 import LoginForm from './components/LoginForm';
@@ -62,6 +63,7 @@ function App() {
         <CartProvider> {/* Bọc toàn bộ ứng dụng trong CartContext.Provider */}
           <SearchProvider> {/* Bọc toàn bộ ứng dụng trong SearchContext.Provider */}
             <NotificationProvider> {/* Bọc toàn bộ ứng dụng trong NotificationContext.Provider */}
+              <OrderProvider> {/* Thêm OrderProvider */}
               <div className="App">
                 {/* Conditional Header based on admin role and route */}
                 <HeaderSwitcher />
@@ -156,6 +158,7 @@ function App() {
                 <FooterSwitcher />
                 <Chatbot /> {/* Thêm component Chatbot vào đây */}
               </div>
+              </OrderProvider>
             </NotificationProvider> {/* Đóng NotificationProvider */}
           </SearchProvider> {/* Đóng SearchProvider */}
         </CartProvider>

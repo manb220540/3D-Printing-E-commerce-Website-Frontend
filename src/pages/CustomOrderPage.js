@@ -5,6 +5,7 @@ import { OrbitControls } from "@react-three/drei";
 import { STLLoader } from "three-stdlib";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
+import { useOrder } from "../context/OrderContext";
 import { toast } from "react-toastify";
 
 
@@ -20,6 +21,7 @@ function CustomOrderPage() {
   const [sizeY, setSizeY] = useState(100);
   const [sizeZ, setSizeZ] = useState(100);
   const [price, setPrice] = useState(0);
+  const { setOrderData } = useOrder();
 
   const navigate = useNavigate();
 
@@ -62,21 +64,21 @@ function CustomOrderPage() {
       toast.error("Vui lòng chọn file STL để tải lên.");
       return;
     }
+    // Lưu dữ liệu vào context
+    setOrderData({
+      file,
+      material,
+      color,
+      layerHeight,
+      infill,
+      sizeX,
+      sizeY,
+      sizeZ,
+      price,
+    });
 
     // chuyển sang trang nhập địa chỉ, mang theo dữ liệu
-    navigate("/custom-checkout", {
-      state: {
-        file,
-        material,
-        color,
-        layerHeight,
-        infill,
-        sizeX,
-        sizeY,
-        sizeZ,
-        price,
-      },
-    });
+    navigate("/custom-checkout");
   };
 
   return (

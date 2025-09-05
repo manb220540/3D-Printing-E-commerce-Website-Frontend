@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { useNavigate, useLocation } from 'react-router-dom';
 import AuthContext from '../context/AuthContext';
 import useFetch from '../hooks/useFetch';
+import { useOrder } from "../context/OrderContext";
 
 function CustomCheckoutPage() {
   const authCtx = useContext(AuthContext);
@@ -11,7 +12,7 @@ function CustomCheckoutPage() {
   const [formData, setFormData] = useState({ address: '', phone: '', paymentMethod: 'COD' });
   const [validationErrors, setValidationErrors] = useState({});
   const navigate = useNavigate();
-  const location = useLocation();
+  const { orderData } = useOrder();
   
 
   // const API_BASE_URL = 'http://localhost:5000';
@@ -70,10 +71,15 @@ function CustomCheckoutPage() {
       toast.error('Vui lòng điền đầy đủ và đúng thông tin.');
       return;
     }
+    if (!orderData) {
+      toast.error("Thiếu thông tin đơn hàng.");
+      navigate("/custom-order");
+      return;
+    }
 
     navigate("/custom-confirm", {
     state: {
-      ...location.state,  // dùng trực tiếp location.state, không phải biến state có thể bị rỗng
+      ...orderData,
       address: formData.address,
       phone: formData.phone,
       paymentMethod: formData.paymentMethod,

@@ -1,15 +1,17 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Button, Container } from "react-bootstrap";
+import { Container, Button } from "react-bootstrap";
+import { useOrder } from "../context/OrderContext";
 
 function OrderFlowRoute({ children, requireState = false }) {
   const location = useLocation();
   const navigate = useNavigate();
+  const { orderData } = useOrder();
 
-  if (requireState && !location.state) {
+  if (requireState && !location.state && !orderData) {
     return (
       <Container className="text-center my-5">
-        <h1 className="display-4 ">Bạn không thể truy cập trực tiếp trang này</h1>
+        <h1 className="display-4">Bạn không thể truy cập trực tiếp trang này</h1>
         <p className="lead">Vui lòng quay lại giỏ hàng hoặc In 3D theo yêu cầu để tiếp tục.</p>
         <div className="d-flex justify-content-center gap-3 mt-4">
           <Button variant="primary" onClick={() => navigate("/gio-hang")}>
