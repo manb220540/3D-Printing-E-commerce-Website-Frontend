@@ -4,6 +4,8 @@ import { Container, Row, Col, Card, Button, Alert } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { CartContext } from '../context/CartContext';
 
+const API_BASE = process.env.REACT_APP_BACKEND_API;
+
 
 function ConfirmationPage() {
   const { state } = useLocation();
@@ -68,7 +70,7 @@ function ConfirmationPage() {
                 <Row key={item.id} className="mb-3 align-items-center">
                   <Col md={2}>
                     <img
-                      src={item.image_url ? `http://localhost:5000${item.image_url}` : 'https://via.placeholder.com/50x50'}
+                      src={item.image_url ? `${API_BASE}${item.image_url}` : 'https://via.placeholder.com/50x50'}
                       alt={item.name}
                       style={{ width: '50px', height: '50px', objectFit: 'cover' }}
                     />

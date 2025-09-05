@@ -201,6 +201,7 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
 const MySwal = withReactContent(Swal);
+const API_BASE = process.env.REACT_APP_BACKEND_API;
 
 function OrderTracking() {
   const [orders, setOrders] = useState([]);
@@ -219,7 +220,7 @@ function OrderTracking() {
   }, [authCtx.isLoggedIn, authCtx.token]);
 
   const fetchOrders = () => {
-    sendRequest('http://localhost:5000/api/orders/user', 'GET', null, {
+    sendRequest(`${API_BASE}/api/orders/user`, 'GET', null, {
       Authorization: `Bearer ${authCtx.token}`,
     });
   };
@@ -228,8 +229,9 @@ function OrderTracking() {
     if (data) {
       if (Array.isArray(data)) {
         setOrders(data);
-      } else if (data.message && data.message.includes('thành công')) {
-        toast.success(data.message);
+      } else if (data.message) {
+        // toast.success(data.message);
+        toast.success("Cập nhật trạng thái đơn hàng thành công");
         fetchOrders(); // refresh sau khi update trạng thái
       }
     }
@@ -245,7 +247,7 @@ function OrderTracking() {
       return;
     }
     try {
-      const res = await fetch(`http://localhost:5000/api/orders/${orderId}`, {
+      const res = await fetch(`${API_BASE}/api/orders/${orderId}`, {
         headers: { Authorization: `Bearer ${authCtx.token}` },
       });
       const details = await res.json();
@@ -276,7 +278,7 @@ function OrderTracking() {
       }
 
       await sendRequest(
-        `http://localhost:5000/api/orders/${orderId}/status`,
+        `${API_BASE}/api/orders/${orderId}/status`,
         'PUT',
         { status: 'cancelled' },
         { Authorization: `Bearer ${authCtx.token}`, 'Content-Type': 'application/json' }
@@ -285,7 +287,7 @@ function OrderTracking() {
   };
 
   const downloadFile = (filePath) => {
-    const url = `http://localhost:5000${filePath}`;
+    const url = `${API_BASE}${filePath}`;
     const link = document.createElement('a');
     link.href = url;
     link.download = filePath.split('/').pop();
@@ -389,7 +391,7 @@ function OrderTracking() {
                       <tbody>
                         {orderDetails[order.id].map((item, idx) => (
                           <tr key={idx}>
-                            <td><img src={item.image_url} alt={item.name} style={{ width: "50px" }} /></td>
+                            <td><img src={`${API_BASE}${item.image_url}`} alt={item.name} style={{ width: "50px" }} /></td>
                             <td>{item.name}</td>
                             <td>{item.quantity}</td>
                             <td>{item.price.toLocaleString('vi-VN')} ₫</td>

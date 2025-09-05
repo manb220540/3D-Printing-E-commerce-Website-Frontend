@@ -3,6 +3,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
 import useFetch from '../hooks/useFetch';
 
+const API_BASE = process.env.REACT_APP_BACKEND_API;
+
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -18,7 +20,7 @@ const ForgotPassword = () => {
 
     try {
       await sendRequest(
-        'http://localhost:5000/api/users/forgot-password',
+        `${API_BASE}/api/users/forgot-password`,
         'POST',
         { email },
         { 'Content-Type': 'application/json' }

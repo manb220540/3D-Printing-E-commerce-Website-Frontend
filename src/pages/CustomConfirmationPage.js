@@ -5,6 +5,8 @@ import AuthContext from "../context/AuthContext";
 import useFetch from "../hooks/useFetch";
 import { toast } from "react-toastify";
 
+const API_BASE = process.env.REACT_APP_BACKEND_API;
+
 function CustomConfirmPage() {
   const { state } = useLocation();
   const navigate = useNavigate();
@@ -33,7 +35,7 @@ function CustomConfirmPage() {
     formData.append("price", state.price);
 
     try {
-      await sendRequest("http://localhost:5000/api/orders/custom", "POST", formData, {
+      await sendRequest(`${API_BASE}/api/orders/custom`, "POST", formData, {
         Authorization: `Bearer ${authCtx.token}`,
       });
       toast.success("Đặt hàng thành công!");

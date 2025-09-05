@@ -4,6 +4,8 @@ import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
 import useFetch from '../hooks/useFetch';
 import AuthContext from '../context/AuthContext';
 
+const API_BASE = process.env.REACT_APP_BACKEND_API;
+
 const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -27,7 +29,7 @@ const LoginForm = () => {
 
     try {
       const response = await sendRequest(
-        'http://localhost:5000/api/users/login',
+        `${API_BASE}/api/users/login`,
         'POST',
         { username, password },
         { 'Content-Type': 'application/json' }

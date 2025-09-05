@@ -4,6 +4,8 @@ import { Form, Button, Container, Row, Col } from 'react-bootstrap'; // Removed 
 import { toast } from 'react-toastify';
 import useFetch from '../hooks/useFetch';
 
+const API_BASE = process.env.REACT_APP_BACKEND_API;
+
 const RegisterForm = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -37,7 +39,7 @@ const RegisterForm = () => {
     };
 
     await sendRequest(
-      'http://localhost:5000/api/users/register',
+      `${API_BASE}/api/users/register`,
       'POST',
       userData,
       { 'Content-Type': 'application/json' }

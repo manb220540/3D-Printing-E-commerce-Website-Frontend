@@ -3,6 +3,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
 import useFetch from '../hooks/useFetch';
 
+const API_BASE = process.env.REACT_APP_BACKEND_API;
+
 const VerifyOTP = () => {
   const [otp, setOtp] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -25,7 +27,7 @@ const VerifyOTP = () => {
 
     try {
       await sendRequest(
-        'http://localhost:5000/api/users/verify-otp',
+        `${API_BASE}/api/users/verify-otp`,
         'POST',
         { email, otp },
         { 'Content-Type': 'application/json' }
@@ -65,7 +67,7 @@ const VerifyOTP = () => {
 
     try {
       await sendRequest(
-        'http://localhost:5000/api/users/reset-password',
+        `${API_BASE}/api/users/reset-password`,
         'POST',
         { email, otp, newPassword },
         { 'Content-Type': 'application/json' }

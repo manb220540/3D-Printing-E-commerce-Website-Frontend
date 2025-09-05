@@ -18,18 +18,18 @@ function Footer() {
             <div className="social-icons mt-3">
               {/* Thay href="#facebook" bằng to="/external-link-to-facebook" hoặc để rỗng nếu chỉ là placeholder */}
               {/* Lưu ý: Các liên kết mạng xã hội thường là external link, bạn có thể vẫn dùng <a> với href thật */}
-              <a href="https://www.facebook.com/yourpage" target="_blank" rel="noopener noreferrer" className="text-white me-3"><FaFacebookF size={24} /></a>
-              <a href="https://www.instagram.com/yourpage" target="_blank" rel="noopener noreferrer" className="text-white me-3"><FaInstagram size={24} /></a>
-              <a href="https://www.youtube.com/yourchannel" target="_blank" rel="noopener noreferrer" className="text-white"><FaYoutube size={24} /></a>
+              <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="text-white me-3"><FaFacebookF size={24} /></a>
+              <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="text-white me-3"><FaInstagram size={24} /></a>
+              <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" className="text-white"><FaYoutube size={24} /></a>
             </div>
           </Col>
 
           <Col md={4} className="mb-4 mb-md-0">
             <h5 className="mb-3">Liên hệ</h5>
             <ul className="list-unstyled">
-              <li className="mb-2"><FaMapMarkerAlt className="me-2" /> Địa chỉ: [Địa chỉ của bạn]</li>
-              <li className="mb-2"><FaPhoneAlt className="me-2" /> Điện thoại: [Số điện thoại của bạn]</li>
-              <li><FaEnvelope className="me-2" /> Email: [Email của bạn]</li>
+              <li className="mb-2"><FaMapMarkerAlt className="me-2" /> Địa chỉ: Số 123, Đường ABC, Quận XYZ, TP. Cần Thơ</li>
+              <li className="mb-2"><FaPhoneAlt className="me-2" /> Điện thoại: (+84) 123 456 789</li>
+              <li><FaEnvelope className="me-2" /> Email: info@print3d.io.vn</li>
             </ul>
           </Col>
 

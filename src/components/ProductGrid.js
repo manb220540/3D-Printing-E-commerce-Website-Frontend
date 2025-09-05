@@ -6,6 +6,8 @@ import { CartContext } from '../context/CartContext';
 import { SearchContext } from '../context/SearchContext';
 import AuthContext from '../context/AuthContext';
 
+const API_BASE = process.env.REACT_APP_BACKEND_API;
+
 const ProductGrid = () => {
   const { data: products, isLoading, error, sendRequest } = useFetch();
   const { addToCart } = useContext(CartContext);
@@ -14,7 +16,7 @@ const ProductGrid = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
-    sendRequest('http://localhost:5000/api/products');
+    sendRequest(`${API_BASE}/api/products`);
   }, [sendRequest]);
 
   useEffect(() => {
@@ -93,7 +95,7 @@ const ProductGrid = () => {
               {product.image_url ? (
                 <Card.Img
                   variant="top"
-                  src={`http://localhost:5000${product.image_url}`}
+                  src={`${API_BASE}${product.image_url}`}
                   alt={product.name}
                   style={{
                     height: '200px',

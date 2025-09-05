@@ -5,6 +5,8 @@ import { toast } from 'react-toastify';
 import AuthContext from '../context/AuthContext';
 import useFetch from '../hooks/useFetch';
 
+
+
 function ProfilePage() {
   const authCtx = useContext(AuthContext);
   const { data: profileData, isLoading, error, sendRequest } = useFetch();
@@ -21,7 +23,8 @@ function ProfilePage() {
   });
   const [validationErrors, setValidationErrors] = useState({});
 
-  const API_BASE_URL = 'http://localhost:5000';
+  // const API_BASE_URL = 'http://localhost:5000';
+  const API_BASE_URL = process.env.REACT_APP_BACKEND_API;
 
   useEffect(() => {
     console.log('profileData updated:', profileData);

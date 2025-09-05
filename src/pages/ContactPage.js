@@ -41,7 +41,7 @@ function ContactPage() {
             <Card.Body>
               <FaMapMarkerAlt size={40} className="text-info mb-3" />
               <Card.Title>Địa chỉ</Card.Title>
-              <Card.Text>Số 123, Đường ABC, Quận XYZ, TP. Hà Nội</Card.Text>
+              <Card.Text>Số 123, Đường ABC, Quận XYZ, TP. Cần Thơ</Card.Text>
             </Card.Body>
           </Card>
         </Col>

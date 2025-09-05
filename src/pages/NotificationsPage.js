@@ -6,6 +6,8 @@ import { toast } from "react-toastify";
 import AuthContext from "../context/AuthContext";
 import { useNotifications } from "../context/NotificationContext";
 
+const API_BASE = process.env.REACT_APP_BACKEND_API;
+
 function NotificationsPage() {
   const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
@@ -22,7 +24,7 @@ function NotificationsPage() {
   const markAsRead = async (id) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/notifications/${id}/read`,
+        `${API_BASE}/api/notifications/${id}/read`,
         {
           method: "PUT",
           headers: { Authorization: `Bearer ${authCtx.token}` },

@@ -6,6 +6,8 @@ import AuthContext from '../context/AuthContext';
 import { SearchContext } from '../context/SearchContext';
 import { FaSearch } from 'react-icons/fa';
 
+const API_BASE = process.env.REACT_APP_BACKEND_API;
+
 function AdminProducts() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -27,7 +29,7 @@ function AdminProducts() {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/products');
+      const response = await axios.get(`${API_BASE}/api/products`);
       setProducts(response.data);
     } catch (err) {
       setError('Không thể tải danh sách sản phẩm.');
@@ -138,7 +140,7 @@ function AdminProducts() {
 
     try {
       if (currentProduct) {
-        await axios.put(`http://localhost:5000/api/products/${currentProduct.id}`, formData, {
+        await axios.put(`${API_BASE}/api/products/${currentProduct.id}`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
             'Authorization': `Bearer ${authCtx.token}`
@@ -149,7 +151,7 @@ function AdminProducts() {
           autoClose: 3000,
         });
       } else {
-        await axios.post('http://localhost:5000/api/products', formData, {
+        await axios.post(`${API_BASE}/api/products`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
             'Authorization': `Bearer ${authCtx.token}`
@@ -174,7 +176,7 @@ function AdminProducts() {
   const handleDelete = async (id) => {
     if (window.confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/products/${id}`, {
+        await axios.delete(`${API_BASE}/api/products/${id}`, {
           headers: {
             'Authorization': `Bearer ${authCtx.token}`
           }
@@ -247,7 +249,7 @@ function AdminProducts() {
                 {product.image_url && (
                   <Card.Img
                     variant="top"
-                    src={`http://localhost:5000${product.image_url}`}
+                    src={`${API_BASE}${product.image_url}`}
                     alt={product.name}
                     style={{ height: '200px', objectFit: 'cover' }}
                   />
@@ -340,7 +342,7 @@ function AdminProducts() {
               />
               {currentProduct && productForm.old_image_url && (
                 <div className="mt-2">
-                  <img src={`http://localhost:5000${productForm.old_image_url}`} alt="Current Product" style={{ width: '100px', height: 'auto' }} />
+                  <img src={`${API_BASE}${productForm.old_image_url}`} alt="Current Product" style={{ width: '100px', height: 'auto' }} />
                   <Form.Text className="text-muted ms-2">Ảnh hiện tại</Form.Text>
                 </div>
               )}

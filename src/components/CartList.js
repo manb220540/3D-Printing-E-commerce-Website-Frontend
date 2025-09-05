@@ -4,6 +4,8 @@ import { CartContext } from '../context/CartContext';
 import AuthContext from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
+const API_BASE = process.env.REACT_APP_BACKEND_API;
+
 const CartList = () => {
   const { cart, cartItems, isLoading, error, updateQuantity, removeItem } = useContext(CartContext);
   const authCtx = useContext(AuthContext);
@@ -56,7 +58,8 @@ const CartList = () => {
             <Card key={item.id} className="mb-3 shadow-sm">
               <Card.Body className="d-flex align-items-center">
                 <img
-                  src={item.image_url ? `http://localhost:5000${item.image_url}` : 'https://via.placeholder.com/100x100?text=No+Image'}
+                  // src={item.image_url ? `http://localhost:5000${item.image_url}` : 'https://via.placeholder.com/100x100?text=No+Image'}
+                  src={item.image_url ? `${API_BASE}${item.image_url}` : 'https://via.placeholder.com/100x100?text=No+Image'}
                   alt={item.name}
                   style={{ width: '100px', height: '100px', objectFit: 'cover', marginRight: '15px' }}
                   onError={(e) => {

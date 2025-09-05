@@ -7,6 +7,8 @@ import useFetch from '../hooks/useFetch';
 import { SearchContext } from '../context/SearchContext';
 import { FaSearch } from 'react-icons/fa';
 
+const API_BASE = process.env.REACT_APP_BACKEND_API;
+
 function AdminUsers() {
   const [users, setUsers] = useState([]);
   const authCtx = useContext(AuthContext);
@@ -16,7 +18,7 @@ function AdminUsers() {
 
   const fetchUsers = () => {
     sendRequest(
-      "http://localhost:5000/api/users",
+      `${API_BASE}/api/users`,
       "GET",
       null,
       { Authorization: `Bearer ${authCtx.token}` }
@@ -55,7 +57,7 @@ function AdminUsers() {
       return;
     }
     await sendRequest(
-      `http://localhost:5000/api/users/update-role/${userId}`,
+      `${API_BASE}/api/users/update-role/${userId}`,
       "PUT",
       { role },
       {

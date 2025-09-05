@@ -5,6 +5,8 @@ import AuthContext from '../context/AuthContext';
 import useFetch from '../hooks/useFetch';
 import { useNotifications } from '../context/NotificationContext';
 
+const API_BASE = process.env.REACT_APP_BACKEND_API;
+
 function AdminDashboard() {
   const authCtx = useContext(AuthContext);
   const { notifications, refreshNotifications } = useNotifications();
@@ -61,22 +63,22 @@ function AdminDashboard() {
 
   useEffect(() => {
     if (authCtx.token) {
-      fetchRevenue('http://localhost:5000/api/orders/revenue', 'GET', null, {
+      fetchRevenue(`${API_BASE}/api/orders/revenue`, 'GET', null, {
         Authorization: `Bearer ${authCtx.token}`,
       });
-      fetchOrderCount('http://localhost:5000/api/orders/count', 'GET', null, {
+      fetchOrderCount(`${API_BASE}/api/orders/count`, 'GET', null, {
         Authorization: `Bearer ${authCtx.token}`,
       });
-      fetchUserCount('http://localhost:5000/api/users/count', 'GET', null, {
+      fetchUserCount(`${API_BASE}/api/users/count`, 'GET', null, {
         Authorization: `Bearer ${authCtx.token}`,
       });
-      fetchProductCount('http://localhost:5000/api/products/count', 'GET', null, {
+      fetchProductCount(`${API_BASE}/api/products/count`, 'GET', null, {
         Authorization: `Bearer ${authCtx.token}`,
       });
-      fetchBlogCount('http://localhost:5000/api/blogs/count', 'GET', null, {
+      fetchBlogCount(`${API_BASE}/api/blogs/count`, 'GET', null, {
         Authorization: `Bearer ${authCtx.token}`,
       });
-      fetchRecentOrders('http://localhost:5000/api/orders/recent', 'GET', null, {
+      fetchRecentOrders(`${API_BASE}/api/orders/recent`, 'GET', null, {
         Authorization: `Bearer ${authCtx.token}`,
       });
     }

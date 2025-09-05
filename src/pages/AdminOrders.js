@@ -349,6 +349,7 @@ import jsPDF from 'jspdf';
 import autoTable from "jspdf-autotable";
 
 const MySwal = withReactContent(Swal);
+const API_BASE = process.env.REACT_APP_BACKEND_API;
 
 function AdminOrders() {
   const [orders, setOrders] = useState([]);
@@ -367,7 +368,7 @@ function AdminOrders() {
       navigate('/login');
       return;
     }
-    sendRequest('http://localhost:5000/api/orders', 'GET', null, {
+    sendRequest(`${API_BASE}/api/orders`, 'GET', null, {
       Authorization: `Bearer ${authCtx.token}`,
     });
   }, [authCtx.isLoggedIn, authCtx.user?.role, authCtx.token, navigate, sendRequest]);
@@ -384,7 +385,7 @@ function AdminOrders() {
       return;
     }
     try {
-      const res = await fetch(`http://localhost:5000/api/orders/${orderId}`, {
+      const res = await fetch(`${API_BASE}/api/orders/${orderId}`, {
         headers: { Authorization: `Bearer ${authCtx.token}` },
       });
       const details = await res.json();
@@ -442,7 +443,7 @@ const exportToPDF = (orderId) => {
 
 // Tải file in
 const downloadFile = (filePath) => {
-  const url = `http://localhost:5000${filePath}`;
+  const url = `${API_BASE}${filePath}`;
   const link = document.createElement('a');
   link.href = url;
   link.download = filePath.split('/').pop();
@@ -476,7 +477,7 @@ const downloadFile = (filePath) => {
     if (result.isConfirmed) {
       try {
         await sendRequest(
-          `http://localhost:5000/api/orders/${orderId}/status`,
+          `${API_BASE}/api/orders/${orderId}/status`,
           'PUT',
           { status, note },
           {
@@ -485,7 +486,7 @@ const downloadFile = (filePath) => {
           }
         );
         toast.success('Cập nhật trạng thái thành công');
-        await sendRequest('http://localhost:5000/api/orders', 'GET', null, {
+        await sendRequest(`${API_BASE}/api/orders`, 'GET', null, {
           Authorization: `Bearer ${authCtx.token}`,
         });
       } catch (err) {
@@ -588,7 +589,7 @@ const downloadFile = (filePath) => {
                       <tbody>
                         {orderDetails[order.id].map((item, i) => (
                           <tr key={i}>
-                            <td><img src={item.image_url} alt={item.name} style={{ width: "50px" }} /></td>
+                            <td><img src={`${API_BASE}${item.image_url}`} alt={item.name} style={{ width: "50px" }} /></td>
                             <td>{item.name}</td>
                             <td>{item.quantity}</td>
                             <td>{item.price.toLocaleString('vi-VN')} ₫</td>

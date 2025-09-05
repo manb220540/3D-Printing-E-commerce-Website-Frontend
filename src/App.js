@@ -21,6 +21,7 @@ import RegisterForm from './components/RegisterForm';
 import ForgotPassword from './components/ForgotPassword';
 import VerifyOTP from './components/VerifyOTP';
 import OrderFlowRoute from './components/OrderFlowRoute';
+import Chatbot from "./components/Chatbot";
 
 // Import Toast notifications
 import { ToastContainer } from 'react-toastify';
@@ -153,6 +154,7 @@ function App() {
                 </main>
                 {/* Conditional Footer based on admin role */}
                 <FooterSwitcher />
+                <Chatbot /> {/* Thêm component Chatbot vào đây */}
               </div>
             </NotificationProvider> {/* Đóng NotificationProvider */}
           </SearchProvider> {/* Đóng SearchProvider */}

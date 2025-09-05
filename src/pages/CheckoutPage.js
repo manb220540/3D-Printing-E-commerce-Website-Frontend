@@ -152,6 +152,8 @@ import { CartContext } from '../context/CartContext';
 import AuthContext from '../context/AuthContext';
 import useFetch from '../hooks/useFetch';
 
+const API_BASE = process.env.REACT_APP_BACKEND_API;
+
 function CheckoutPage() {
   const { cartItems, isLoading: cartLoading } = useContext(CartContext);
   const authCtx = useContext(AuthContext);
@@ -179,7 +181,7 @@ function CheckoutPage() {
     const fetchProfile = async () => {
       try {
         await sendRequest(
-          'http://localhost:5000/api/users/profile',
+          `${API_BASE}/api/users/profile`,
           'GET',
           null,
           { Authorization: `Bearer ${authCtx.token}` }
@@ -264,7 +266,7 @@ function CheckoutPage() {
                   <Row key={item.id} className="mb-3 align-items-center">
                     <Col md={2}>
                       <img
-                        src={item.image_url ? `http://localhost:5000${item.image_url}` : 'https://via.placeholder.com/50x50'}
+                        src={item.image_url ? `${API_BASE}${item.image_url}` : 'https://via.placeholder.com/50x50'}
                         alt={item.name}
                         style={{ width: '50px', height: '50px', objectFit: 'cover' }}
                       />

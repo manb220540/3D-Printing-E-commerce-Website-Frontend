@@ -3,13 +3,15 @@ import { useParams } from 'react-router-dom';
 import { Container, Row, Col, Card, Spinner, Alert, Image } from 'react-bootstrap';
 import useFetch from '../hooks/useFetch';
 
+const API_BASE = process.env.REACT_APP_BACKEND_API;
+
 function BlogDetailPage() {
   const { id } = useParams(); // Lấy ID từ URL
   const { data: blog, isLoading, error, sendRequest } = useFetch();
 
   useEffect(() => {
     // Gọi API để lấy chi tiết blog khi component mount hoặc id thay đổi
-    sendRequest(`http://localhost:5000/api/blogs/${id}`);
+    sendRequest(`${API_BASE}/api/blogs/${id}`);
   }, [id, sendRequest]);
 
   if (isLoading) {
@@ -58,7 +60,7 @@ function BlogDetailPage() {
           {blog.image_url && (
             <div className="text-center mb-4">
               <Image
-                src={`http://localhost:5000${blog.image_url}`}
+                src={`${API_BASE}${blog.image_url}`}
                 alt={blog.title}
                 className="img-fluid rounded shadow-sm"
                 style={{ maxWidth: '100%', maxHeight: '500px', objectFit: 'cover' }}

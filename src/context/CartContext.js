@@ -2,6 +2,8 @@ import React, { createContext, useState, useEffect, useContext } from 'react';
 import AuthContext from './AuthContext';
 import useFetch from '../hooks/useFetch';
 
+const API_BASE = process.env.REACT_APP_BACKEND_API;
+
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
@@ -36,7 +38,7 @@ export const CartProvider = ({ children }) => {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${authCtx.token || localStorage.getItem('token')}`,
     };
-    await sendRequest('http://localhost:5000/api/cart', 'GET', null, headers);
+    await sendRequest(`${API_BASE}/api/cart`, 'GET', null, headers);
   };
 
   const addToCart = async (productId, quantity = 1) => {
@@ -49,7 +51,7 @@ export const CartProvider = ({ children }) => {
     };
     const body = { cartId: cart?.id, productId, quantity };
     try {
-      await sendRequest('http://localhost:5000/api/cart/items', 'POST', body, headers);
+      await sendRequest(`${API_BASE}/api/cart/items`, 'POST', body, headers);
       if (!fetchError) await fetchCart();
     } catch (err) {
       throw new Error(err.message || 'Lỗi khi thêm sản phẩm vào giỏ hàng.');
@@ -65,7 +67,7 @@ export const CartProvider = ({ children }) => {
       Authorization: `Bearer ${authCtx.token || localStorage.getItem('token')}`,
     };
     const body = { quantity };
-    await sendRequest(`http://localhost:5000/api/cart/items/${itemId}`, 'PUT', body, headers);
+    await sendRequest(`${API_BASE}/api/cart/items/${itemId}`, 'PUT', body, headers);
     if (!fetchError) await fetchCart();
   };
 
@@ -77,7 +79,7 @@ export const CartProvider = ({ children }) => {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${authCtx.token || localStorage.getItem('token')}`,
     };
-    await sendRequest(`http://localhost:5000/api/cart/items/${itemId}`, 'DELETE', null, headers);
+    await sendRequest(`${API_BASE}/api/cart/items/${itemId}`, 'DELETE', null, headers);
     if (!fetchError) await fetchCart();
   };
 
@@ -95,7 +97,7 @@ export const CartProvider = ({ children }) => {
   };
   try {
     const response = await sendRequest(
-      'http://localhost:5000/api/orders',
+      `${API_BASE}/api/orders`,
       'POST',
       { cartId: cart.id, shippingAddress, phoneNumber, paymentMethod },
       headers

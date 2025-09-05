@@ -3,6 +3,8 @@ import React, { createContext, useContext, useEffect, useState, useCallback } fr
 import AuthContext from "./AuthContext";
 import useFetch from "../hooks/useFetch";
 
+const API_BASE = process.env.REACT_APP_BACKEND_API;
+
 const NotificationContext = createContext({
   notifications: [],
   unreadCount: 0,
@@ -18,7 +20,7 @@ export const NotificationProvider = ({ children }) => {
     if (!authCtx.isLoggedIn) return;
 
     sendRequest(
-      "http://localhost:5000/api/notifications",
+      `${API_BASE}/api/notifications`,
       "GET",
       null,
       { Authorization: `Bearer ${authCtx.token}` }

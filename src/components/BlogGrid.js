@@ -3,12 +3,15 @@ import { Container, Row, Col, Card, Button, Spinner, Alert } from 'react-bootstr
 import { Link } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
 
+const API_BASE = process.env.REACT_APP_BACKEND_API;
+
+
 function BlogGrid() {
   const { data: blogs, isLoading, error, sendRequest } = useFetch();
 
   useEffect(() => {
     // Gọi API để lấy danh sách blog khi component mount
-    sendRequest('http://localhost:5000/api/blogs');
+    sendRequest(`${API_BASE}/api/blogs`);
   }, [sendRequest]);
 
   if (isLoading) {
@@ -50,7 +53,8 @@ function BlogGrid() {
             {post.image_url && (
               <Card.Img
                 variant="top"
-                src={`http://localhost:5000${post.image_url}`}
+                // src={`http://localhost:5000${post.image_url}`}
+                src={`${API_BASE}${post.image_url}`}
                 alt={post.title}
                 style={{ height: '200px', objectFit: 'cover' }}
                 onError={(e) => {

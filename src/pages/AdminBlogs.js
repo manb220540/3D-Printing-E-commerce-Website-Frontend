@@ -6,6 +6,8 @@ import { SearchContext } from '../context/SearchContext';
 import { FaSearch } from 'react-icons/fa';
 import useFetch from '../hooks/useFetch';
 
+const API_BASE_URL = process.env.REACT_APP_BACKEND_API;
+
 function AdminBlogs() {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -23,7 +25,7 @@ function AdminBlogs() {
     old_image_url: ''
   });
 
-  const API_BASE_URL = 'http://localhost:5000';
+  // const API_BASE_URL = 'http://localhost:5000';
   const { data, isLoading: fetchLoading, error: fetchError, sendRequest } = useFetch();
 
   const fetchBlogs = useCallback(async () => {
